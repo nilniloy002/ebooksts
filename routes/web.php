@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\EbookController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,18 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' => 'admin.
         Route::view('/forgot-password-page', 'admin.pages.forgot-password')->name('forgot-password');
         Route::view('/login-page', 'admin.pages.login')->name('login');
     });
+
+    Route::resource('ebooks', EbookController::class)->names([
+        'index' => 'ebooks.index',
+        'create' => 'ebooks.create',
+        'store' => 'ebooks.store',
+        'edit' => 'ebooks.edit',
+        'update' => 'ebooks.update',
+    ]);
+    Route::get('ebooks/{ebook}/view', [EbookController::class, 'view'])->name('ebooks.view');
+    Route::get('/ebooks/{ebook}/secure-pdf', [EbookController::class, 'securePdf'])->name('ebooks.secure-pdf');
+
+
 });
 
 

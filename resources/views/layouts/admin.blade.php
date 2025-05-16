@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('assets/css/tailwind.output.css')}}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/Chart.min.css') }}"/>
-
     {{-- favicon --}}
     <link rel="icon" sizes="180x180" href="{{ asset('assets/img/windmill.png') }}">
 </head>
@@ -31,7 +30,7 @@
         </main>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset("assets/js/alpine.min.js") }}" defer></script>
 <script src="{{ asset("assets/js/Chart.min.js") }}" defer></script>
 <script src="{{ asset("assets/js/init-alpine.js") }}"></script>
