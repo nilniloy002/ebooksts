@@ -121,27 +121,58 @@ class EbookController extends Controller
         }
     }
    
+    // public function securePdf(Ebook $ebook)
+    // {
+    //     if (!auth()->check()) {
+    //         abort(403, 'Unauthorized');
+    //     }
+
+    //     $path = storage_path("app/private/{$ebook->ebook_file}"); // Remove 'private/' since it's already in the path
+
+    //     if (!file_exists($path)) {
+    //         abort(404);
+    //     }
+
+    // // Disable PDF download and printing in browser
+    // return response()->file($path, [
+    //     'Content-Type' => 'application/pdf',
+    //     'Content-Disposition' => 'inline; filename="' . basename($ebook->ebook_file) . '"',
+    //     'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+    //     'X-Robots-Tag' => 'noindex, nofollow',
+    //     'Content-Security-Policy' => "frame-ancestors 'self'",
+    // ]);
+    
+    // }
+
+
     public function securePdf(Ebook $ebook)
     {
         if (!auth()->check()) {
             abort(403, 'Unauthorized');
         }
 
-        $path = storage_path("app/private/{$ebook->ebook_file}"); // Remove 'private/' since it's already in the path
+        $path = storage_path("app/private/{$ebook->ebook_file}"); 
 
         if (!file_exists($path)) {
             abort(404);
         }
 
-    // Disable PDF download and printing in browser
-    return response()->file($path, [
-        'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'inline; filename="' . basename($ebook->ebook_file) . '"',
-        'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
-        'X-Robots-Tag' => 'noindex, nofollow',
-        'Content-Security-Policy' => "frame-ancestors 'self'",
-    ]);
-    
+        // Create a streamed response with special headers
+        return response()->stream(function() use ($path) {
+            $stream = fopen($path, 'rb');
+            fpassthru($stream);
+            fclose($stream);
+        }, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="preview.pdf"',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+            'X-Content-Type-Options' => 'nosniff',
+            'X-Frame-Options' => 'SAMEORIGIN',
+            'Content-Security-Policy' => "frame-ancestors 'self'",
+            'X-Robots-Tag' => 'noindex, nofollow, noarchive',
+        ]);
     }
 
 }

@@ -1,4 +1,9 @@
 @extends('layouts.admin-flipbook')
+<style>
+.ti-download,.ti-sharethis {
+    display: none !important;
+}
+</style>    
 
 @section('content')
 <div class="container grid px-6 mx-auto">
@@ -136,3 +141,4 @@
     </div>
 </div>
 @endsection
+
