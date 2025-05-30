@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\EbookController;
+use App\Http\Controllers\Admin\StudentSubscriptionController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' => 'admin.
         'edit' => 'ebooks.edit',
         'update' => 'ebooks.update',
     ]);
+
+    Route::resource('subscriptions',StudentSubscriptionController::class)->names([
+    'index' => 'subscriptions.index',
+    'create' => 'subscriptions.create',
+    'store' => 'subscriptions.store',
+    'edit' => 'subscriptions.edit',
+    'update' => 'subscriptions.update',
+]);
+
     Route::get('ebooks/{ebook}/view', [EbookController::class, 'view'])->name('ebooks.view');
     Route::get('/ebooks/{ebook}/secure-pdf', [EbookController::class, 'securePdf'])->name('ebooks.secure-pdf');
 

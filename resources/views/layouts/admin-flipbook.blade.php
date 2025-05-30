@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="The modern, accessible and dark theme ready HTML dashboard. Full of custom, reusable components to speed up the development of admin panels.">
-    <meta name="author" content="abdulbasit-dev">
-    <title>Laravel Windmill Dashboard</title>
+    <meta name="description" content="STS IELTS  Academic - Comprehensive preparation materials and practice tests for IELTS Academic module">
+    <meta name="keywords" content="IELTS, IELTS Reading, Academic IELTS, IELTS preparation, IELTS practice tests, STS IELTS">
+    <meta name="author" content="STS Institute">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="STS IELTS Academic Platform">
+    <meta property="og:description" content="Premium IELTS Academic preparation materials and practice tests">
+    <meta property="og:type" content="website">
+    <title>STS IELTS Academic | Target & Practice Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('assets/css/tailwind.output.css')}}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/Chart.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('assets/dflip/css/dflip.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/dflip/css/themify-icons.min.css') }}"/>
     {{-- favicon --}}
-    <link rel="icon" sizes="180x180" href="{{ asset('assets/img/windmill.png') }}">
+    <link rel="icon" sizes="180x180" href="https://sts.institute/wp-content/uploads/2024/08/Logo-Fav.-Icon-02.png">
     <style>
     .df-flipbook {
         width: 100%;
