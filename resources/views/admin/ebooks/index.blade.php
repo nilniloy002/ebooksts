@@ -142,3 +142,12 @@
 </div>
 @endsection
 
+<script>
+document.addEventListener('keydown', function(e) {
+    // Detect Ctrl+P or Command+P
+    if ((e.ctrlKey || e.metaKey) && e.keyCode === 80) {
+        e.preventDefault();
+        alert('Printing is disabled on this page.');
+    }
+});
+</script>
