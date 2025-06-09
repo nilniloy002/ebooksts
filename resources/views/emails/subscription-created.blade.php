@@ -18,7 +18,7 @@
             </p>
 
             <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                <p class="mb-2"><strong class="text-gray-800">Website:</strong> <a href="{{ url('/') }}" class="text-purple-600 underline">{{ url('/') }}</a></p>
+                <p class="mb-2"><strong class="text-gray-800">Website:</strong> <a href="{{ url('/') }}" class="text-purple-600 underline">{{ url('https://ebook.stsinstitute.site/public/student/login') }}</a></p>
                 <p class="mb-2"><strong class="text-gray-800">Student ID:</strong> {{ $subscription->std_id }}</p>
                 <p class="mb-2"><strong class="text-gray-800">Password:</strong> {{ $subscription->password }}</p>
                 <p class="mb-2"><strong class="text-gray-800">Access Start Date:</strong> {{ \Carbon\Carbon::parse($subscription->sub_start_date)->format('F j, Y') }}</p>
