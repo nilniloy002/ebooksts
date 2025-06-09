@@ -69,9 +69,7 @@ Route::middleware('student')->group(function () {
         $student = \App\Models\StudentSubscription::find(session('student'));
         return view('student.dashboard', compact('student'));
     })->name('student.dashboard');
-    
- // Allow students to securely view the PDF
-    Route::get('/student/ebooks/{ebook}/secure-pdf', [EbookController::class, 'securePdf'])->name('student.ebooks.secure-pdf');
+
     // Student Logout
     Route::post('/student/logout', function (Request $request) {
         $request->session()->forget('student');

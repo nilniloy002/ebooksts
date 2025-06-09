@@ -284,7 +284,7 @@
                                     <div class="h-48 overflow-hidden">
                                         @if($ebook->ebook_file)
                         <div class="_df_thumb w-full h-full bg-cover bg-center rounded"
-                            source="{{ route('admin.ebooks.secure-pdf', $ebook->id) }}"
+                            source="{{ route('student.ebooks.secure-pdf', $ebook->id) }}"
                             thumb="{{ asset($ebook->ebook_cover) }}"></div>
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-gray-300 text-gray-500 rounded">
