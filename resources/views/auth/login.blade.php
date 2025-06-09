@@ -6,7 +6,7 @@
                 <img
                         aria-hidden="true"
                         class="object-cover w-full h-full dark:hidden"
-                        src="../public/assets/img/login-office.jpeg"
+                        src="https://sts.institute/wp-content/uploads/2024/10/bg-about-sts.jpg"
                         alt="Office"
                 />
                 <img

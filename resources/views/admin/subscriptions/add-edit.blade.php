@@ -55,6 +55,21 @@
       />
     </label>
 
+    <!-- Password (optional) -->
+    <label class="block text-sm">
+      <span class="text-gray-700 dark:text-gray-400">Password</span>
+      <input
+        type="password"
+        name="password"
+        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 form-input"
+        placeholder="Enter new password (leave blank to keep current)"
+      />
+      @if(isset($subscription))
+        <p class="text-xs text-gray-500 mt-1">Leave blank to keep existing password.</p>
+      @endif
+    </label>
+
+
     <!-- Subscription Start Date -->
     <label class="block text-sm">
       <span class="text-gray-700 dark:text-gray-400">Subscription Start Date</span>

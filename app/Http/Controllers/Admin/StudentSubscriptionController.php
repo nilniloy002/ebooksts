@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\StudentSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Mail\SubscriptionCreated;
+use Illuminate\Support\Facades\Mail;
 
 class StudentSubscriptionController extends Controller
 {
@@ -21,6 +23,25 @@ class StudentSubscriptionController extends Controller
         return view('admin.subscriptions.add-edit', compact('subscription'));    
     }
 
+    // public function store(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'std_name' => 'required',
+    //         'std_email' => 'required|email|unique:student_subscriptions,std_email',
+    //         'std_id' => 'required|unique:student_subscriptions,std_id',
+    //         'sub_start_date' => 'required|date',
+    //         'sub_end_date' => 'required|date|after:sub_start_date',
+    //         'sub_fee' => 'required|numeric',
+    //         'status' => 'required|in:on,off',
+    //     ]);
+
+    //     $validated['password'] = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
+    //     StudentSubscription::create($validated);
+
+    //     return redirect()->route('admin.subscriptions.index')->with('success', 'Subscription created successfully!');
+    // }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -33,9 +54,14 @@ class StudentSubscriptionController extends Controller
             'status' => 'required|in:on,off',
         ]);
 
+        // Generate random password
         $validated['password'] = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        StudentSubscription::create($validated);
+        // Create subscription
+        $subscription = StudentSubscription::create($validated);
+
+        // Send email
+        Mail::to($validated['std_email'])->send(new SubscriptionCreated($subscription));
 
         return redirect()->route('admin.subscriptions.index')->with('success', 'Subscription created successfully!');
     }
@@ -55,12 +81,19 @@ class StudentSubscriptionController extends Controller
             'sub_end_date' => 'required|date|after:sub_start_date',
             'sub_fee' => 'required|numeric',
             'status' => 'required|in:on,off',
+            'password' => 'nullable|min:6', // Optional password field
         ]);
+
+        // If password is filled, update it; else, remove to keep current
+        if (!$request->filled('password')) {
+            unset($validated['password']);
+        }
 
         $subscription->update($validated);
 
         return redirect()->route('admin.subscriptions.index')->with('success', 'Subscription updated successfully!');
     }
+
 
     public function destroy(StudentSubscription $subscription)
     {

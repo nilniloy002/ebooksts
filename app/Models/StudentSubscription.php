@@ -16,5 +16,6 @@ class StudentSubscription extends Model
         'sub_end_date',
         'sub_fee',
         'status',
+        // 'password',
     ];
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\EbookController;
 use App\Http\Controllers\Admin\StudentSubscriptionController;
+use App\Http\Controllers\Auth\StudentLoginController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,22 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' => 'admin.
 
 
 });
+
+Route::middleware('student')->group(function () {
+    Route::get('/student/dashboard', function () {
+        $student = \App\Models\StudentSubscription::find(session('student'));
+        return view('student.dashboard', compact('student'));
+    })->name('student.dashboard');
+
+    // Student Logout
+    Route::post('/student/logout', function (Request $request) {
+        $request->session()->forget('student');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('student.login')->with('success', 'Logged out successfully!');
+    })->name('student.logout');
+});
+Route::get('/student/dashboard', [StudentLoginController::class, 'dashboard'])->name('student.dashboard');
 
 
 require __DIR__ . '/auth.php';
