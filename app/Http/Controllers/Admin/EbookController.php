@@ -147,9 +147,9 @@ class EbookController extends Controller
 
     public function securePdf(Ebook $ebook)
     {
-        if (!auth()->check()) {
-            abort(403, 'Unauthorized');
-        }
+        // if (!auth()->check()) {
+        //     abort(403, 'Unauthorized');
+        // }
 
         $path = storage_path("app/private/{$ebook->ebook_file}"); 
 
