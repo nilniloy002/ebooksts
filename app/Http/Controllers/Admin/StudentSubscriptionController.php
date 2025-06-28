@@ -11,9 +11,24 @@ use Illuminate\Support\Facades\Mail;
 
 class StudentSubscriptionController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    // $subscriptions = StudentSubscription::orderBy('created_at', 'desc')->paginate(25);
+    // return view('admin.subscriptions.index', compact('subscriptions'));
+
+    // }
+
+    public function index(Request $request)
     {
-        $subscriptions = StudentSubscription::paginate(10);
+        $search = $request->input('search');
+        
+        $subscriptions = StudentSubscription::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('std_email', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(25);
+        
         return view('admin.subscriptions.index', compact('subscriptions'));
     }
 
